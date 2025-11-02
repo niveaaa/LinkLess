@@ -1,17 +1,24 @@
 # core/sentiment.py
 
-from transformers import pipeline
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-# Initialize once
-sentiment_pipeline = pipeline("sentiment-analysis")
+analyzer = SentimentIntensityAnalyzer()
 
 def get_sentiment(text: str) -> dict:
     
     try:
-        result = sentiment_pipeline(text)[0]
-        return {
-            "label": result["label"],
-            "score": round(result["score"], 3)
-        }
+        scores = analyzer.polarity_scores(text)
+        return scores
     except Exception as e:
-        return {"label": "ERROR", "score": 0.0, "error": str(e)}
+        return {"error": str(e)}
+
+def sentiment_label(scores: dict) -> str:
+    
+    if "compound" not in scores:
+        return "ERROR"
+    c = scores["compound"]
+    if c >= 0.05:
+        return "POSITIVE"
+    elif c <= -0.05:
+        return "NEGATIVE"
+    return "NEUTRAL"
