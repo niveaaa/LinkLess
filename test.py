@@ -1,13 +1,11 @@
 from core.fetcher import extract_text_from_url
-from core.summarizer import summarize_text
-from core.keywords import extract_keywords
+from core.sentiment import get_sentiment
 
 url = "https://www.bbc.com/news/articles/cdjrymnx1e8o"
-result = extract_text_from_url(url)
+article = extract_text_from_url(url)
 
-if result["success"]:
-    print("\nKEYWORDS:")
-    for k in extract_keywords(result["text"]):
-        print("-", k)
+if article["success"]:
+    sentiment = get_sentiment(article["text"])
+    print("Sentiment:", sentiment)
 else:
-    print("FETCH ERROR:", result["error"])
+    print("Fetch failed:", article["error"])
