@@ -2,6 +2,7 @@
 
 from rake_nltk import Rake
 import nltk
+import re
 
 try:
     nltk.data.find("corpora/stopwords")
@@ -9,16 +10,19 @@ except LookupError:
     nltk.download("stopwords")
 
 def extract_keywords(text: str, max_keywords: int = 8) -> list:
-    
-    try:
-        rake = Rake()
-        rake.extract_keywords_from_text(text)
-        ranked = rake.get_ranked_phrases()
+    rake = Rake()
+    rake.extract_keywords_from_text(text)
+    phrases = rake.get_ranked_phrases()
 
-        if not ranked:
-            return ["(No keywords found)"]
+    cleaned = []
+    for p in phrases:
+        p = p.strip().lower()
+        if len(p) < 4: 
+            continue
+        if len(p.split()) > 4:
+            continue
+        if re.search(r"\d", p):
+            continue
+        cleaned.append(p)
 
-        return ranked[:max_keywords]
-
-    except Exception as e:
-        return [f"(Error extracting keywords: {e})"]
+    return cleaned[:max_keywords] if cleaned else ["(No good keywords found)"]
