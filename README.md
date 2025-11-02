@@ -25,7 +25,7 @@ LinkLess is a fast web tool that takes any article URL, extracts the main conten
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/LinkLess.git
+git clone https://github.com/niveaaa/LinkLess.git
 cd LinkLess
 pip install -r requirements.txt
 ```
@@ -66,3 +66,4 @@ LinkLess/
 ## 👤 Author
 Built by nivea during a caffeine-powered dev sprint.
 PRs welcome. Bugs expected. Vibes immaculate.
+
