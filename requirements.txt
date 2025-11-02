@@ -4,4 +4,4 @@ beautifulsoup4
 requests
 vaderSentiment
 sumy
-lxml
+lxml-html-clean
