@@ -1,7 +1,10 @@
 from core.fetcher import extract_text_from_url
 
-test_url = "https://www.bbc.com/news/science-environment-68006825"
+test_url = "https://www.bbc.com/news/articles/cdjrymnx1e8o"
 result = extract_text_from_url(test_url)
 
-print(result["title"])
-print(result["text"][:500])  # preview first 500 chars
+if result["success"]:
+    print("\nTITLE:", result["title"])
+    print("\nTEXT PREVIEW:\n", result["text"])
+else:
+    print("❌ FAILED:", result["error"])

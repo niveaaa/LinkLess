@@ -4,12 +4,7 @@ from newspaper import Article
 
 def extract_text_from_url(url: str) -> dict:
     """
-    {
-        "title": "...",
-        "text": "...",
-        "success": True/False,
-        "error": "...",
-    }
+    Fetches the main text content from a given URL.
     """
     try:
         article = Article(url)
@@ -17,13 +12,23 @@ def extract_text_from_url(url: str) -> dict:
         article.parse()
 
         if not article.text.strip():
-            return {"success": False, "error": "No readable text found."}
+            return {
+                "success": False,
+                "title": None,
+                "text": None,
+                "error": "No readable text found."
+            }
 
         return {
             "success": True,
-            "title": article.title,
+            "title": article.title or "Untitled",
             "text": article.text
         }
     
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        return {
+            "success": False,
+            "title": None,
+            "text": None,
+            "error": str(e)
+        }
