@@ -1,10 +1,13 @@
 from core.fetcher import extract_text_from_url
+from core.summarizer import summarize_text
 
-test_url = "https://www.bbc.com/news/articles/cdjrymnx1e8o"
-result = extract_text_from_url(test_url)
+url = "https://www.bbc.com/news/articles/cdjrymnx1e8o"   # replace with real link
+result = extract_text_from_url(url)
 
 if result["success"]:
-    print("\nTITLE:", result["title"])
-    print("\nTEXT PREVIEW:\n", result["text"])
+    bullets = summarize_text(result["text"])
+    print("\nSUMMARY:")
+    for b in bullets:
+        print("•", b)
 else:
-    print("❌ FAILED:", result["error"])
+    print("FETCH ERROR:", result["error"])
