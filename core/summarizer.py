@@ -8,6 +8,7 @@ import nltk
 
 def summarize_text(text: str, sentence_count: int = 10) -> list:
 
+    '''
     try:
         nltk.data.find("tokenizers/punkt")
     except LookupError:
@@ -15,6 +16,7 @@ def summarize_text(text: str, sentence_count: int = 10) -> list:
             nltk.download("punkt", quiet=True)
         except:
             pass
+    '''
 
     try:
         nltk.data.find("tokenizers/punkt_tab")
