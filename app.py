@@ -30,6 +30,11 @@ if st.button("Process"):
             st.markdown("### 🧠 Summary")
             st.write(summary)
 
+            if isinstance(summary, list):
+                summary_text = "\n".join(summary)
+            else:
+                summary_text = str(summary)
+
             # Sentiment
             scores = get_sentiment(text)
             label = sentiment_label(scores)
@@ -49,6 +54,6 @@ if st.button("Process"):
             # Download button
             st.download_button(
                 label="Download summary as .txt",
-                data=summary,
+                data=summary_text,
                 file_name="summary.txt"
             )

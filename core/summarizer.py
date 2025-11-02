@@ -4,7 +4,7 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lsa import LsaSummarizer
 
-def summarize_text(text: str, sentence_count: int = 5) -> list:
+def summarize_text(text: str, sentence_count: int = 10) -> list:
    
     try:
         parser = PlaintextParser.from_string(text, Tokenizer("english"))
